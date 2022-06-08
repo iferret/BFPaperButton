@@ -13,6 +13,6 @@ let package = Package(
         .library(name: "BFPaperButton", targets: ["BFPaperButton"]),
     ],
     targets: [
-        .target(name: "BFPaperButton", path: "BFPaperButton",publicHeadersPath: ".", cSettings: [.headerSearchPath(".")])
+        .target(name: "BFPaperButton", path: "BFPaperButton", publicHeadersPath: ".", cSettings: [.headerSearchPath(".")])
     ]
 )
