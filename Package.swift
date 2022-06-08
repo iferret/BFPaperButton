@@ -13,6 +13,6 @@ let package = Package(
         .library(name: "BFPaperButton", targets: ["BFPaperButton"]),
     ],
     targets: [
-        .binaryTarget(name: "BFPaperButton", path: "BFPaperButton.xcframework")
+        .target(name: "BFPaperButton", path: "BFPaperButton",publicHeadersPath: ".", cSettings: [.headerSearchPath(".")])
     ]
 )
