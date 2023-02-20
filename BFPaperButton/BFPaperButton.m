@@ -106,6 +106,8 @@ CGFloat const bfPaperButton_tapCircleDiameterDefault = -2.f;
 - (void)setEnabled:(BOOL)enabled
 {
     [super setEnabled:enabled];
+    // update backgroundColor
+    self.backgroundColor = enabled == YES ? self.backgroundColor : self.disableBackgroundColor;
     
     if (self.isRaised) {
         if (!enabled) {

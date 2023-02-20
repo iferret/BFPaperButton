@@ -146,5 +146,7 @@ IB_DESIGNABLE
 /** A property governing the title font. It is settable via UIAppearance! */
 @property (nonatomic) IBInspectable UIFont *titleFont UI_APPEARANCE_SELECTOR;
 
+/// background color for disabled
+@property (nonatomic) IBInspectable UIColor *disableBackgroundColor;
 
 @end
