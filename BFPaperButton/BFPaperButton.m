@@ -43,6 +43,8 @@
 @property UIColor *dumbTapCircleFillColor;
 @property UIColor *clearBackgroundDumbTapCircleColor;
 @property UIColor *clearBackgroundDumbFadeColor;
+
+@property UIColor *originBackgroundColor;
 @end
 
 @implementation BFPaperButton
@@ -103,11 +105,24 @@ CGFloat const bfPaperButton_tapCircleDiameterDefault = -2.f;
 
 
 #pragma mark - Super Overrides
-- (void)setEnabled:(BOOL)enabled
-{
+
+/// setBackgroundColor
+/// - Parameter backgroundColor: backgroundColor
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    [super setBackgroundColor: backgroundColor];
+    if (_originBackgroundColor == nil) {
+        _originBackgroundColor = backgroundColor;
+    }
+}
+
+/// setEnabled
+/// - Parameter enabled: enabled
+- (void)setEnabled:(BOOL)enabled {
     [super setEnabled:enabled];
     // update backgroundColor
-    self.backgroundColor = enabled == YES ? self.backgroundColor : self.disableBackgroundColor;
+    if (_originBackgroundColor != nil && _disableBackgroundColor != nil) {
+        self.backgroundColor = enabled == YES ? _originBackgroundColor : _disableBackgroundColor;
+    }
     
     if (self.isRaised) {
         if (!enabled) {
@@ -120,8 +135,8 @@ CGFloat const bfPaperButton_tapCircleDiameterDefault = -2.f;
     [self setNeedsDisplay];
 }
 
-- (void)sizeToFit
-{
+/// sizeToFit
+- (void)sizeToFit {
     [super sizeToFit];
     
     if (self.isRaised) {
@@ -153,13 +168,13 @@ CGFloat const bfPaperButton_tapCircleDiameterDefault = -2.f;
     self.fadeAndClippingMaskRect = CGRectMake(self.bounds.origin.x, self.bounds.origin.y , self.bounds.size.width, self.bounds.size.height);
     
     [self setEnabled:self.enabled];
-
+    
     [self setNeedsDisplay];
     [self.layer setNeedsDisplay];
 }
 
-- (void)layoutSubviews
-{
+/// layoutSubviews
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     if (self.isRaised) {
@@ -191,7 +206,7 @@ CGFloat const bfPaperButton_tapCircleDiameterDefault = -2.f;
     self.fadeAndClippingMaskRect = CGRectMake(self.bounds.origin.x, self.bounds.origin.y , self.bounds.size.width, self.bounds.size.height);
     
     [self setEnabled:self.enabled];
-
+    
     [self setNeedsDisplay];
     [self.layer setNeedsDisplay];
 }
